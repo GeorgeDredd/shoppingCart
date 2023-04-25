@@ -23,39 +23,76 @@ let products = [
     {
         id: 1,
         name: 'PRODUCT NAME 1',
-        image: '1.PNG',
+        image: '1.JPG',
         price: 12000
     },
     {
         id: 2,
         name: 'PRODUCT NAME 2',
-        image: '2.PNG',
+        image: '2.JPG',
         price: 12000
     },
     {
         id: 3,
         name: 'PRODUCT NAME 3',
-        image: '3.PNG',
+        image: '3.JPG',
         price: 12000
     },
     {
         id: 4,
         name: 'PRODUCT NAME 4',
-        image: '4.PNG',
+        image: '4.JPG',
         price: 12000
     },
     {
         id: 5,
         name: 'PRODUCT NAME 5',
-        image: '5.PNG',
+        image: '5.JPG',
         price: 12000
     },
     {
         id: 6,
         name: 'PRODUCT NAME 6',
-        image: '6.PNG',
+        image: '6.JPG',
         price: 12000
     },
+    {
+        id: 7,
+        name: 'PRODUCT NAME 7',
+        image: '7.JPG',
+        price: 12000
+    },
+    {
+        id: 8,
+        name: 'PRODUCT NAME 8',
+        image: '8.JPG',
+        price: 12000
+    },
+    {
+        id: 9,
+        name: 'PRODUCT NAME 9',
+        image: '9.JPG',
+        price: 12000
+    },
+    {
+        id: 10,
+        name: 'PRODUCT NAME 10',
+        image: '10.JPG',
+        price: 12000
+    },
+    {
+        id: 11,
+        name: 'PRODUCT NAME 11',
+        image: '11.JPG',
+        price: 12000
+    },
+    {
+        id: 12,
+        name: 'PRODUCT NAME 12',
+        image: '12.JPG',
+        price: 12000
+    },
+    
 ];
 
 
@@ -123,25 +160,31 @@ function reloadCart(){
 
 
 
+// let productsPrice = 0
 
  function subQuantity(key, quantity){
     if(quantity == 0) {
          delete cartDiv[key];
      }else {
          cartDiv[key].quantity = quantity;
+         cartDiv[key].price = products[key].price / quantity;
+
+
+        //  cartDiv[key].quantity = quantity;
         //  products[key].price -=  products[key].price;
-         cartDiv[key].price -= products[key].price;
+        //  cartDiv[key].price -= products[key].price;
      }
      reloadCart();
  }
 
-
-
-let productsPrice = 0
  function addQuantity(key, quantity){
     cartDiv[key].quantity = quantity;
-    productsPrice = productsPrice + products[key].price;
-    cartDiv[key].price = productsPrice;
+    cartDiv[key].price = products[key].price * quantity;
+
+
+    // cartDiv[key].quantity = quantity;
+    // productsPrice = productsPrice + products[key].price;
+    // cartDiv[key].price = productsPrice;
 
      reloadCart();
  }
