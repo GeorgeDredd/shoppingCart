@@ -8,7 +8,7 @@ let productList = document.querySelector('.productList');
 let cartList = document.querySelector('.cartList');
 
 
-// Add Event listeners
+// Add click event listeners 
 openCart.addEventListener('click', ()=>{
     body.classList.add('active');
 })
@@ -73,26 +73,7 @@ let products = [
         name: 'PRODUCT NAME 9',
         image: '9.JPG',
         price: 12000
-    },
-    {
-        id: 10,
-        name: 'PRODUCT NAME 10',
-        image: '10.JPG',
-        price: 12000
-    },
-    {
-        id: 11,
-        name: 'PRODUCT NAME 11',
-        image: '11.JPG',
-        price: 12000
-    },
-    {
-        id: 12,
-        name: 'PRODUCT NAME 12',
-        image: '12.JPG',
-        price: 12000
-    },
-    
+    },    
 ];
 
 
@@ -108,8 +89,10 @@ function loadProducts(){
             <img src="image/${value.image}" />
             <div class="title">${value.name}</div>
             <div class="price">${value.price.toLocaleString()}</div>
+            <button onclick="productDetails(${key})">Product Details</button> 
             <button onclick="addToCart(${key})">Add to Cart</button> 
         `;
+        // append a node (element) as the last child of an element
         productList.appendChild(newDiv);
     })
 }
@@ -121,6 +104,7 @@ loadProducts();
 let cartDiv = [];
 
 function addToCart(key) {
+    // set as empty or unknown value
     if(cartDiv[key] == null){
         // Assign individual products into cartDiv
         cartDiv[key] = products[key];
@@ -150,7 +134,7 @@ function reloadCart(){
                 <div class="count">${value.quantity}</div>
                 <button class="plus" onclick="addQuantity(${key}, ${value.quantity + 1})">+</button>      
             </div>
-        `
+        ` 
         cartList.appendChild(newDiv);
     }
 })
@@ -164,6 +148,7 @@ function reloadCart(){
 
  function subQuantity(key, quantity){
     if(quantity == 0) {
+        // remove property from an object
          delete cartDiv[key];
      }else {
          cartDiv[key].quantity = quantity;
