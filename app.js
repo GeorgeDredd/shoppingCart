@@ -1,4 +1,4 @@
-// Declare Variables
+// Declare Variables.productList
 let body = document.querySelector('body');
 let openCart = document.querySelector('.cart');
 let quantity = document.querySelector('.quantity')
@@ -6,6 +6,8 @@ let total = document.querySelector('.total');
 let closeCart = document.querySelector('.closeCart');
 let productList = document.querySelector('.productList');
 let cartList = document.querySelector('.cartList');
+// Product Desc Page
+let productDesc = document.querySelector('.productDesc');
 
 
 // Add click event listeners 
@@ -89,7 +91,7 @@ function loadProducts(){
             <img src="image/${value.image}" />
             <div class="title">${value.name}</div>
             <div class="price">${value.price.toLocaleString()}</div>
-            <button onclick="productDetails(${key})">Product Details</button> 
+            <a href="productDesc.html"><button onclick="productDetails(${key}, ${value})">Product Details</button></a>
             <button onclick="addToCart(${key})">Add to Cart</button> 
         `;
         // append a node (element) as the last child of an element
@@ -99,6 +101,28 @@ function loadProducts(){
 loadProducts();
 
 
+function productDetails(key) {
+
+    // set as empty or unknown value
+    if(cartDiv[key] == null){
+        // Assign individual products into cartDiv
+        cartDiv[key] = products[key];
+    }
+
+
+    products.forEach((value, key)=>{
+        console.log("hello");
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = `
+        <img src="image/${value.image}" />
+        <div class="title">${value.name}</div>
+        <div class="price">${value.price.toLocaleString()}</div>
+        <p>This product is cool <p>
+        <button onclick="addToCart(${key})">Add to Cart</button> 
+        `;
+        productDesc.appendChild(newDiv);
+    });
+}
 
 // Declare variable which is an empty array to add items to cart
 let cartDiv = [];
@@ -118,8 +142,9 @@ function reloadCart(){
     let count = 0;
     let totalPrice = 0;
     // Loop through the items in the cartDiv array and create a new list for each individual products
+   
     cartDiv.forEach((value, key) => {
-        totalPrice = totalPrice + value.price;
+        totalPrice = totalPrice + (value.price * value.quantity);
         count = count + value.quantity;
 
 
@@ -136,6 +161,7 @@ function reloadCart(){
             </div>
         ` 
         cartList.appendChild(newDiv);
+
     }
 })
     total.innerText  = totalPrice.toLocaleString();
@@ -152,24 +178,19 @@ function reloadCart(){
          delete cartDiv[key];
      }else {
          cartDiv[key].quantity = quantity;
-         cartDiv[key].price = products[key].price / quantity;
-
-
-        //  cartDiv[key].quantity = quantity;
-        //  products[key].price -=  products[key].price;
-        //  cartDiv[key].price -= products[key].price;
+         console.log(products[key].price);
+         console.log(quantity);
+         cartDiv[key].price = products[key].price;
+         
      }
      reloadCart();
  }
 
  function addQuantity(key, quantity){
     cartDiv[key].quantity = quantity;
-    cartDiv[key].price = products[key].price * quantity;
-
-
-    // cartDiv[key].quantity = quantity;
-    // productsPrice = productsPrice + products[key].price;
-    // cartDiv[key].price = productsPrice;
-
+    console.log(products[key].price);
+    console.log(quantity);
+    cartDiv[key].price = products[key].price;
+   
      reloadCart();
  }
