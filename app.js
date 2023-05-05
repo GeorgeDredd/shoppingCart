@@ -8,6 +8,7 @@ let productList = document.querySelector('.productList');
 let cartList = document.querySelector('.cartList');
 // Product Desc Page
 let productDesc = document.querySelector('.productDesc');
+console.log(productDesc);
 
 
 // Add click event listeners 
@@ -102,15 +103,6 @@ loadProducts();
 
 
 function productDetails(key) {
-
-    // set as empty or unknown value
-    if(cartDiv[key] == null){
-        // Assign individual products into cartDiv
-        cartDiv[key] = products[key];
-    }
-
-
-    products.forEach((value, key)=>{
         console.log("hello");
         let newDiv = document.createElement('div');
         newDiv.innerHTML = `
@@ -120,8 +112,7 @@ function productDetails(key) {
         <p>This product is cool <p>
         <button onclick="addToCart(${key})">Add to Cart</button> 
         `;
-        productDesc.appendChild(newDiv);
-    });
+        productDesc.innerHTML = newDiv;
 }
 
 // Declare variable which is an empty array to add items to cart
@@ -136,39 +127,6 @@ function addToCart(key) {
     }
     reloadCart();
 }
-
-function reloadCart(){
-    cartList.innerHTML = '';
-    let count = 0;
-    let totalPrice = 0;
-    // Loop through the items in the cartDiv array and create a new list for each individual products
-   
-    cartDiv.forEach((value, key) => {
-        totalPrice = totalPrice + (value.price * value.quantity);
-        count = count + value.quantity;
-
-
-        if(value != null) {
-        let newDiv =  document.createElement('li');
-        newDiv.innerHTML = `
-            <div><img src="image/${value.image}"/></div>
-            <div>${value.name}</div>
-            <div>${value.price.toLocaleString()}</div>
-            <div>
-                <button class="minus" onclick="subQuantity(${key}, ${value.quantity - 1}, )">-</button>
-                <div class="count">${value.quantity}</div>
-                <button class="plus" onclick="addQuantity(${key}, ${value.quantity + 1})">+</button>      
-            </div>
-        ` 
-        cartList.appendChild(newDiv);
-
-    }
-})
-    total.innerText  = totalPrice.toLocaleString();
-    quantity.innerText = count;
-}
-
-
 
 // let productsPrice = 0
 

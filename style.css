@@ -93,8 +93,9 @@ header .cart:hover span {
 .productDesc {
     display: flex;
     flex-direction: column;
-    height: 50vh;
-    outline: 2px solid red;
+    margin-top: 10vh;
+    height: 60vh;
+    outline: 2px solid #1C1F25;
 }
 
 
@@ -198,7 +199,6 @@ header .cart:hover span {
     color: #fff;
     row-gap: 10px;
     margin-bottom: 20px;
-    outline: 2px solid red;
     width: 95%;
 }
 
