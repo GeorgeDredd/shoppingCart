@@ -128,6 +128,31 @@ function addToCart(key) {
     reloadCart();
 }
 
+function reloadCart() {
+    cartList.innerHTML =  '';
+    let count = 0;
+    let totalPrice = 0;
+    cartList.forEach((value, key) => {
+        totalPrice = totalPrice + value.price;
+        count = count + value.quantity;
+
+        if(value != null) {
+            let newDiv = document.createElement('li');
+            newDiv.innerHTML =  `
+                <div><img src="image/${value.image}"> </div>
+                <div>${value.name}</div>
+                <div>${value.price.toLocaleString()}</div>
+                <div>${value.quantity}</div>
+                <div>
+                    <button onclick="subQuantity(${key}, ${value.quantity - 1})">-</button>
+                    <div class="count">${value.quantity} </div>
+                    <button onclick="addQuantity(${key}, ${value.quantity + 1})">+</button>
+                </div>
+            `
+        }
+    })
+}
+
 // let productsPrice = 0
 
  function subQuantity(key, quantity){
@@ -136,8 +161,6 @@ function addToCart(key) {
          delete cartDiv[key];
      }else {
          cartDiv[key].quantity = quantity;
-         console.log(products[key].price);
-         console.log(quantity);
          cartDiv[key].price = products[key].price;
          
      }
@@ -146,8 +169,6 @@ function addToCart(key) {
 
  function addQuantity(key, quantity){
     cartDiv[key].quantity = quantity;
-    console.log(products[key].price);
-    console.log(quantity);
     cartDiv[key].price = products[key].price;
    
      reloadCart();
